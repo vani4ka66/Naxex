@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study</title>
+    <link rel="shortcut icon" href="#"/>
+    <link href="study.css" rel="stylesheet">
+
+    <script type="text/javascript" src="study-core.js"></script>
+    <script type="text/javascript">
+        const logger = Core.Logger.Of("Study");
+        logger.info("Starting app...");
+
+        window.onload = () => {
+            logger.info("Load orders...");
+            const order1 = new Core.BuyOrder(1, 12, Core.Currency.EUR, 1590533087470);
+            const order2 = new Core.BuyOrder(2, 26.45, Core.Currency.EUR, 1570533087470);
+            const order3 = new Core.SellOrder(3, 56.1412, Core.Currency.USD, 1560533087470);
+            const order4 = new Core.SellOrder(4, 7.066, Core.Currency.EUR, 1540533087470);
+            const order5 = new Core.BuyOrder(5, 31.125, Core.Currency.USD, 1510533087470);
+
+            const orders = new Core.Orders();
+            orders.addOrder(order1);
+            orders.addOrder(order2);
+            orders.addOrder(order3);
+            orders.addOrder(order4);
+            orders.addOrder(order5);
+
+            setTimeout(() => {
+                logger.info("Render orders...");
+                const ordersContainer = document.getElementById("orders");
+                const addOrderCell = (orderRow, content) => {
+                    const orderCell = document.createElement("div");
+                    orderCell.className = "orderCell";
+                    orderCell.innerText = content;
+                    orderRow.appendChild(orderCell);
+                };
+                orders.forEach((order) => {
+                    logger.debug("Render order row for: " + order.id());
+                    const orderRow = document.createElement("div");
+                    orderRow.className = "orderRow";
+                    ordersContainer.appendChild(orderRow);
+                    addOrderCell(orderRow, order.id());
+                    addOrderCell(orderRow, order.formatAmount());
+                    addOrderCell(orderRow, order.formatDate());
+                });
+                document.getElementById("loaderContainer").style.display = "none";
+            }, 3000);
+        }
+    </script>
+
+</head>
+<body>
+    <div id="loaderContainer" class="loaderContainer">
+        <div class="loader"></div>
+    </div>
+    <div id="orders" class="orders">
+        <div class="orderRow">
+            <div class="orderHead">Id</div>
+            <div class="orderHead">Amount</div>
+            <div class="orderHead">Date</div>
+        </div>
+    </div>
+</body>
+</html>

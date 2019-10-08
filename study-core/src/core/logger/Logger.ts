@@ -1,9 +1,9 @@
 /* tslint:disable:no-console */
-import moment from "moment/moment";
 import Utils from "util/Utils";
 import LogLevel from "enum/LogLevel";
+import DateTime from "core/format/DateTime";
 
-export class Logger {
+export default class Logger {
 
     private static LOG_LEVEL: LogLevel = LogLevel.DEBUG;
     private name: string;
@@ -27,7 +27,7 @@ export class Logger {
     }
 
     private format(level: string): string {
-        return [moment(new Date()).format("DD-MM-YYYY HH:mm:ss.SSS"), level, "[", this.name, "]", " "].join("");
+        return [DateTime.format(new Date().getTime()), level, "[", this.name, "]", " "].join("");
     }
 
     public debug(message?: any, ...optionalParams: any[]): void {

@@ -4,6 +4,7 @@ const TerserJSPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const WriteFilePlugin = require("write-file-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env = {}, opts) => {
@@ -21,6 +22,7 @@ module.exports = (env = {}, opts) => {
         ]),
         new CopyWebpackPlugin([
             { from: path.resolve('./', "./resources/html/"), to: __dirname + "/dist/"},
+            { from: path.resolve('./', "./resources/css/"), to: __dirname + "/dist/"},
         ]),
         new webpack.NamedModulesPlugin(),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
@@ -30,10 +32,18 @@ module.exports = (env = {}, opts) => {
         target: 'web',
         mode: env.prod ? 'production' : 'development',
         entry: {
-            "Logger": "./src/core/logger/Logger.ts"
+            "Core": "./src/index.ts"
         },
         output: {
-            filename: env.prod ? "[name].[contenthash].js" : "[name].js",
+            filename: (chunkData) => {
+                const pref = () => {
+                    switch(chunkData.chunk.name) {
+                        case "Core":
+                            return "study-core";
+                    }
+                };
+                return pref() + (env.prod ? ".[contenthash].js" : ".js");
+            },
             path: __dirname + "/dist",
             publicPath: "/",
             library: "[name]"
@@ -88,7 +98,23 @@ module.exports = (env = {}, opts) => {
             })
         );
     } else {
+        plugins.push(new WriteFilePlugin());
         plugins.push(new BundleAnalyzerPlugin());
+        webpackConfig.devServer = {
+            port: 12345,
+            host: "localhost",
+            open: true,
+            contentBase: path.resolve(__dirname, "dist"),
+            publicPath: "/",
+            watchContentBase: true,
+            watchOptions: {
+                ignored: /node_modules/
+            },
+            openPage: 'Study.html',
+            historyApiFallback: {
+                index:'Study.html'
+            }
+        };
     }
     return webpackConfig;
 };

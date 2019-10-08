@@ -95,7 +95,7 @@ export default class Utils {
         return false;
     }
 
-    public static deepCopy(source: object): object {
+    public static deepCopy<T>(source: object): T {
         return JSON.parse(JSON.stringify(source));
     }
 
