@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "lib": [
+      "ES6",
+      "ES2015",
+      "ES2016",
+      "ES2017",
+      "ES2015.promise"
+    ],
+    "declaration": true,
+    "outDir": "lib",
+    "allowJs": false,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "noUnusedLocals": false,
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "core/*": ["src/core/*"],
+      "enum/*": ["src/enum/*"],
+      "util/*": ["src/util/*"]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}

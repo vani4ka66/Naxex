@@ -1,0 +1,12 @@
+/data_model/
+.classpath
+.project
+.settings/
+.idea/
+.awcache/
+dist/
+lib/
+.temp/
+node_modules/
+npm-debug.log
+

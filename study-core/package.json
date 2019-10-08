@@ -1,0 +1,50 @@
+{
+  "license": "Tiebreak Solutions",
+  "author": {
+    "name": "Dmitriy Sumskoy",
+    "email": "dmitriy.sumskoy@tiebreak.solutions"
+  },
+  "name": "study-core",
+  "version": "1.0.0",
+  "description": "Study core project",
+  "main": "index.ts",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build-dev": "webpack --env.dev",
+    "build-prod": "webpack --env.prod",
+    "static": "static dist --host-address localhost --port 12345 --gzip"
+  },
+  "dependencies": {
+    "moment": "2.24.0",
+    "typescript-map": "0.0.7"
+  },
+  "devDependencies": {
+    "@types/chai": "4.1.7",
+    "@types/mocha": "5.2.7",
+    "@types/node": "12.7.0",
+    "@types/webpack-env": "1.13.7",
+    "awesome-typescript-loader": "5.2.1",
+    "chai": "4.2.0",
+    "clean-webpack-plugin": "0.1.17",
+    "compression-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "5.0.4",
+    "dotenv": "8.0.0",
+    "es6-object-assign": "1.1.0",
+    "es6-promise": "4.2.8",
+    "mocha": "6.2.0",
+    "node-static": "0.7.11",
+    "source-map-loader": "0.2.4",
+    "terser-webpack-plugin": "1.4.1",
+    "ts-loader": "6.0.4",
+    "tslint": "5.18.0",
+    "tslint-loader": "3.5.4",
+    "typescript": "3.5.3",
+    "webpack": "4.39.1",
+    "webpack-bundle-analyzer": "3.4.1",
+    "webpack-cli": "3.3.6",
+    "webpack-hashed-module-id-plugin": "0.1.4"
+  }
+}
