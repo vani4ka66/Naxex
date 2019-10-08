@@ -13,6 +13,7 @@
     "src"
   ],
   "scripts": {
+    "start": "ts-node-dev -P tsconfig.ts-node-dev.json -r tsconfig-paths/register ./src/run.ts",
     "watch": "webpack-dev-server",
     "build-dev": "webpack --env.dev",
     "build-prod": "webpack --env.prod",
@@ -39,15 +40,18 @@
     "node-static": "0.7.11",
     "source-map-loader": "0.2.4",
     "terser-webpack-plugin": "1.4.1",
+    "tsconfig-paths": "3.9.0",
     "ts-loader": "6.0.4",
+    "ts-node": "8.4.1",
+    "ts-node-dev": "1.0.0-pre.43",
     "tslint": "5.18.0",
     "tslint-loader": "3.5.4",
     "typescript": "3.5.3",
     "webpack": "4.39.1",
     "webpack-bundle-analyzer": "3.4.1",
     "webpack-cli": "3.3.6",
-    "webpack-hashed-module-id-plugin": "0.1.4",
     "webpack-dev-server": "3.8.0",
+    "webpack-hashed-module-id-plugin": "0.1.4",
     "webpack-livereload-plugin": "2.2.0",
     "write-file-webpack-plugin": "4.5.1"
   }

@@ -1,4 +1,4 @@
-import moment from "moment";
+import * as moment from "moment";
 import Utils from "util/Utils";
 
 export default class DateTime {
