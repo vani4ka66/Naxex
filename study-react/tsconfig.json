@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "esnext",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "lib": [
+      "DOM",
+      "ES6",
+      "ES2015",
+      "ES2016",
+      "ES2017",
+      "ES2015.promise"
+    ],
+    "allowJs": false,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "noUnusedLocals": false,
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "core/*": ["../study-core/src/core/*"],
+      "enum/*": ["../study-core/src/enum/*"],
+      "util/*": ["../study-core/src/util/*"],
+      "component/*": ["src/component/*"],
+      "app/*": ["src/app/*"]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}
