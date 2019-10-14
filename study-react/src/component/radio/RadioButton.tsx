@@ -1,30 +1,38 @@
 import React from "react";
-import {ViewType} from "app/ViewType";
 import {WithStyles} from "react-jss";
+import {AppContextConsumer, AppContextValue} from "app/context/AppContext";
+import {ViewType} from "app/ViewType";
 
 interface RadioButtonProps extends WithStyles<any> {
 
     id: string;
     groupName: string;
-    title: string;
     viewType: ViewType;
-    checked: boolean;
-    setViewType: (viewType: ViewType) => void;
 }
 
 export const RadioButton: React.FunctionComponent<RadioButtonProps> = (props: RadioButtonProps): JSX.Element => {
 
-    const {id, groupName, title, checked, classes, viewType, setViewType} = props;
+    const {id, groupName, classes, viewType} = props;
 
-    const onClick = () => {
-        setViewType(viewType);
-    };
-
-    return <div>
-        <label className={"radio-container " + classes.label} onClick={onClick}>
-            {title}
-            <input type="radio" id={id} value={id} name={groupName} checked={checked} readOnly />
-            <span className="checkmark"></span>
-        </label>
-    </div>;
+    return (
+        <AppContextConsumer>
+            {(value: AppContextValue) =>
+                <div>
+                    <label className={"radio-container " + classes.label}>
+                        {viewType}
+                        <input type="radio"
+                               id={id}
+                               value={id}
+                               name={groupName}
+                               checked={value.viewType === viewType}
+                               readOnly
+                               onClick={() => {
+                                   value.setViewType(viewType);
+                               }} />
+                        <span className="checkmark"></span>
+                    </label>
+                </div>
+            }
+        </AppContextConsumer>
+    );
 };

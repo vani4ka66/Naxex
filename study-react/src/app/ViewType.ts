@@ -1,6 +1,6 @@
 export enum ViewType {
 
     Timer = "Timer",
-    TimerFunctional = "Timer Functional",
+    TimerFunctional = "Functional Timer",
     Orders = "Orders",
 }

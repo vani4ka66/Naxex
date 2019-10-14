@@ -4,20 +4,17 @@ export const contentStyles = (theme) => ({
         height: "100%",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center"
-    },
-    contentWrapper: {
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center"
+        justifyContent: "space-between"
     },
     content: {
-        width: "40%",
-        minWidth: "30%",
+        width: "60%",
+        minWidth: "50%",
         height: "100%",
         display: "flex",
         flexDirection: "column",
+    },
+    sideBar: {
+        width: "300px"
     },
     contentHeader: {
         width: "100%",
@@ -28,7 +25,6 @@ export const contentStyles = (theme) => ({
         alignItems: "center"
     },
     contentPageWrapper: {
-        width: "100%",
         height: "100%",
         borderLeft: `1px solid ${theme.color_neutral}`,
         borderRight: `1px solid ${theme.color_neutral}`,
