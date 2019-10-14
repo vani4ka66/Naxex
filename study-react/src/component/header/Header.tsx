@@ -1,10 +1,9 @@
 import React from "react";
-import injectSheet from "react-jss";
+import withStyles, {WithStyles} from "react-jss";
 import {headerStyles} from "./styles";
 
-export interface HeaderProps {
+export interface HeaderProps extends WithStyles<any> {
 
-    classes?: any;
 }
 
 class Header extends React.Component<HeaderProps> {
@@ -20,4 +19,4 @@ class Header extends React.Component<HeaderProps> {
     }
 }
 
-export default injectSheet(headerStyles)(Header);
+export default withStyles(headerStyles)(Header);

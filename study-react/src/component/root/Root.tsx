@@ -1,12 +1,13 @@
 import React from "react";
-import injectSheet from "react-jss";
+// @ts-ignore
+import withStyles, {WithStyles} from "react-jss";
 import {rootStyles} from "./styles";
 import Header from "component/header/Header";
 import Content from "component/content/Content";
 
-export interface RootProps {
+export interface RootProps extends WithStyles<any> {
 
-    classes?: any;
+    classes: any;
 }
 
 class Root extends React.Component<RootProps> {
@@ -22,4 +23,4 @@ class Root extends React.Component<RootProps> {
     }
 }
 
-export default injectSheet(rootStyles)(Root);
+export default withStyles(rootStyles)(Root);

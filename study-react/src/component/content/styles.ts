@@ -4,7 +4,12 @@ export const contentStyles = (theme) => ({
         height: "100%",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: "center"
+    },
+    contentWrapper: {
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
         alignItems: "center"
     },
     content: {

@@ -1,28 +1,52 @@
 import React from "react";
-import injectSheet from "react-jss";
+// @ts-ignore
+import withStyles, {WithStyles} from "react-jss";
 import {contentStyles} from "./styles";
 import Logger from "core/logger/Logger";
+import RadioButtonGroup from "component/radio/RadioButtonGroup";
+import {ViewType} from "app/ViewType";
 
-export interface ContentProps {
+export interface ContentProps extends WithStyles<any> {
 
-    classes?: any;
-    routeName?: string;
+    classes: any;
 }
 
-class Content extends React.Component<ContentProps> {
+export interface ContentState {
+
+    viewType: ViewType;
+}
+
+class Content extends React.Component<ContentProps, ContentState> {
 
     private readonly _logger: Logger = Logger.Of(this.constructor.toString().match(/\w+/g)[1]);
 
+    public constructor(props: ContentProps) {
+        super(props);
+        this.state = {
+            viewType: ViewType.Timer
+        };
+    }
+
+    private onChange = (viewType: ViewType): void => {
+        this.setState({
+            viewType
+        });
+    }
+
     public render() {
-        const {classes, routeName} = this.props;
-        this._logger.info("Use route: " + routeName);
+        const {classes} = this.props;
+        const {viewType} = this.state;
+        this._logger.info("Use view type: " + viewType);
 
         return (
             <div className={classes.root}>
-                <div className={classes.content}>
-                    <div className={classes.contentHeader}>
-                    </div>
-                    <div className={classes.contentPageWrapper}>
+                <RadioButtonGroup viewType={viewType} onChange={this.onChange}/>
+                <div className={classes.contentWrapper}>
+                    <div className={classes.content}>
+                        <div className={classes.contentHeader}>
+                        </div>
+                        <div className={classes.contentPageWrapper}>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,4 +54,4 @@ class Content extends React.Component<ContentProps> {
     }
 }
 
-export default injectSheet(contentStyles)(Content);
+export default withStyles(contentStyles)(Content);
