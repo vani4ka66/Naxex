@@ -6,20 +6,49 @@ import {AppContextConsumer, AppContextValue} from "app/context/AppContext";
 import {ViewType} from "app/ViewType";
 import RadioButtonGroup from "component/radio/RadioButtonGroup";
 import Clock from "component/clock/Clock";
+import Utils from "util/Utils";
 
-export interface ContentProps extends WithStyles<any> {
+interface ContentProps extends WithStyles<any> {
 
     classes: any;
 }
 
+interface ContentState {
+
+    isRedClock: boolean;
+}
+
 class Content extends React.Component<ContentProps, any> {
 
+    private _clockSwitcher: any;
+
+    public constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
     private content(viewType: ViewType): JSX.Element {
+        if (Utils.isNotNull(this._clockSwitcher)) {
+            clearInterval(this._clockSwitcher);
+            this._clockSwitcher = null;
+        }
         switch (viewType) {
             case ViewType.Clock:
-                return <Clock />;
+                this._clockSwitcher = setInterval(() => {
+                    this.setState({
+                        isRedClock: !this.state.isRedClock
+                    });
+                }, 10000);
+                return <Clock isRed={this.state.isRedClock}/>;
         }
         return null;
+    }
+
+    public componentWillUnmount(): void {
+        if (Utils.isNotNull(this._clockSwitcher)) {
+            clearInterval(this._clockSwitcher);
+            this._clockSwitcher = null;
+        }
     }
 
     public render() {

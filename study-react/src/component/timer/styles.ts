@@ -1,4 +1,4 @@
-export const clockStyles = (theme: any) => ({
+export const timerStyles = (theme) => ({
     root: {
         width: "100%",
         height: "80px",
@@ -6,13 +6,5 @@ export const clockStyles = (theme: any) => ({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center"
-    },
-    timer: {
-        "&.red": {
-            color: "#FF0000"
-        },
-        "&.black": {
-            color: "#000000"
-        }
     }
 });

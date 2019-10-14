@@ -4,12 +4,18 @@ import {clockStyles} from "./styles";
 import DateTime from "core/format/DateTime";
 import Utils from "util/Utils";
 
-export interface ClockState {
+interface ClockProps extends WithStyles<any> {
 
-    value: number;
+    isRed: boolean;
 }
 
-class Clock extends React.Component<WithStyles<any>, ClockState> {
+interface ClockState {
+
+    value?: number;
+    isRed?: boolean;
+}
+
+class Clock extends React.Component<ClockProps, ClockState> {
 
     private _registration: any;
 
@@ -18,6 +24,15 @@ class Clock extends React.Component<WithStyles<any>, ClockState> {
         this.state = {
             value: 0
         };
+    }
+
+    public static getDerivedStateFromProps(nextProps: ClockProps, prevState: ClockState): ClockState {
+        if (prevState.isRed !== nextProps.isRed) {
+            return {
+                isRed: nextProps.isRed
+            };
+        }
+        return null;
     }
 
     public componentDidMount(): void {
@@ -45,11 +60,11 @@ class Clock extends React.Component<WithStyles<any>, ClockState> {
 
     public render() {
         const {classes} = this.props;
-        const {value} = this.state;
+        const {value, isRed} = this.state;
 
         return (
             <div className={classes.root}>
-                <div className={classes.timer}>
+                <div className={classes.timer + (isRed ? " red" : " black")}>
                     {DateTime.formatTimeSS(value)}
                 </div>
             </div>
