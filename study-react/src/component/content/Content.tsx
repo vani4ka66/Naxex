@@ -3,7 +3,9 @@ import React from "react";
 import withStyles, {WithStyles} from "react-jss";
 import {contentStyles} from "./styles";
 import {AppContextConsumer, AppContextValue} from "app/context/AppContext";
+import {ViewType} from "app/ViewType";
 import RadioButtonGroup from "component/radio/RadioButtonGroup";
+import Clock from "component/clock/Clock";
 
 export interface ContentProps extends WithStyles<any> {
 
@@ -11,6 +13,14 @@ export interface ContentProps extends WithStyles<any> {
 }
 
 class Content extends React.Component<ContentProps, any> {
+
+    private content(viewType: ViewType): JSX.Element {
+        switch (viewType) {
+            case ViewType.Clock:
+                return <Clock />;
+        }
+        return null;
+    }
 
     public render() {
         const {classes} = this.props;
@@ -26,6 +36,9 @@ class Content extends React.Component<ContentProps, any> {
                                     {value.viewType}
                                 </div>
                                 <div className={classes.contentPageWrapper}>
+                                    {
+                                        this.content(value.viewType)
+                                    }
                                 </div>
                             </div>
                             <div className={classes.sideBar}></div>

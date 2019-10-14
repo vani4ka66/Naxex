@@ -21,7 +21,7 @@ const RadioButtonGroup: React.FunctionComponent<RadioButtonGroupProps> = (props:
     };
 
     return <div className={classes.root}>
-        {createButton(1, ViewType.Timer)}
+        {createButton(1, ViewType.Clock)}
         {createButton(2, ViewType.TimerFunctional)}
         {createButton(3, ViewType.Orders)}
     </div>;

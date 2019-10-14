@@ -14,6 +14,10 @@ export default class DateTime {
         return Utils.greaterThen0(v) ? moment(v).format("HH:mm:ss") : "-";
     }
 
+    public static formatTimeSS(v: number): string {
+        return Utils.greaterThen0(v) ? moment(v).format("HH:mm:ss.SSS") : "-";
+    }
+
     public static formatDateTime(v: number): string {
         return Utils.greaterThen0(v) ? moment(v).format("DD-MM-YYYY HH:mm:ss") : "-";
     }
