@@ -1,0 +1,19 @@
+{
+  "name": "at",
+  "version": "1.0.0",
+  "description": "",
+  "main": "codecept.conf.js",
+  "dependencies": {
+    "codeceptjs": "^2.3.2",
+    "mailslurp-client": "^6.5.0",
+    "puppeteer": "^1.20.0"
+  },
+  "devDependencies": {
+    "@codeceptjs/mailslurp-helper": "^1.0.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}
