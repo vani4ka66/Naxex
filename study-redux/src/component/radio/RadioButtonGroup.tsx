@@ -1,7 +1,7 @@
 import React from "react";
 import withStyles, {WithStyles} from "react-jss";
 import {ViewType} from "app/ViewType";
-import {RadioButton} from "component/radio/RadioButton";
+import RadioButton from "component/radio/RadioButton";
 import {radioStyles} from "component/radio/styles";
 
 interface RadioButtonGroupProps extends WithStyles<any> {

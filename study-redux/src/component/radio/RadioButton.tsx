@@ -15,7 +15,7 @@ interface RadioButtonProps extends WithStyles<any> {
     dispatch?: Dispatch<ReduxState>;
 }
 
-export const RadioButton: React.FunctionComponent<RadioButtonProps> = (props: RadioButtonProps): JSX.Element => {
+const RadioButton: React.FunctionComponent<RadioButtonProps> = (props: RadioButtonProps): JSX.Element => {
 
     const {id, groupName, classes, viewType, appViewType, dispatch} = props;
 
@@ -38,8 +38,8 @@ export const RadioButton: React.FunctionComponent<RadioButtonProps> = (props: Ra
     );
 };
 
-export default connect((state: ReduxState, ownProps: RadioButtonProps) => {
-        return Object.assign({}, ownProps, {
+export default connect((state: ReduxState, ownProps: any) => {
+    return Object.assign({}, ownProps, {
             appViewType: state.app.viewType
         });
     },
