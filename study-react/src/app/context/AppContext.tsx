@@ -24,7 +24,7 @@ export class AppContext extends React.Component<any, AppContextState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            viewType: ViewType.Clock
+            viewType: ViewType.TimerFunctional
         };
     }
 

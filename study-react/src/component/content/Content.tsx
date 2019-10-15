@@ -7,6 +7,7 @@ import {ViewType} from "app/ViewType";
 import RadioButtonGroup from "component/radio/RadioButtonGroup";
 import Clock from "component/clock/Clock";
 import Utils from "util/Utils";
+import Timer from "component/timer/Timer";
 
 interface ContentProps extends WithStyles<any> {
 
@@ -40,6 +41,8 @@ class Content extends React.Component<ContentProps, any> {
                     });
                 }, 10000);
                 return <Clock isRed={this.state.isRedClock}/>;
+            case ViewType.TimerFunctional:
+                return <Timer />;
         }
         return null;
     }
