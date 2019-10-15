@@ -10,33 +10,14 @@ import {SetClockValue} from "app/redux/ReduxActions";
 
 interface ClockProps extends WithStyles<any> {
 
-    isRed: boolean;
+    isRed?: boolean;
     value?: number;
     dispatch?: Dispatch<ReduxState>;
 }
 
-interface ClockState {
-
-    isRed?: boolean;
-}
-
-class Clock extends React.Component<ClockProps, ClockState> {
+class Clock extends React.Component<ClockProps, any> {
 
     private _registration: any;
-
-    constructor(props: ClockProps) {
-        super(props);
-        this.state = {};
-    }
-
-    public static getDerivedStateFromProps(nextProps: ClockProps, prevState: ClockState): ClockState {
-        if (prevState.isRed !== nextProps.isRed) {
-            return {
-                isRed: nextProps.isRed
-            };
-        }
-        return null;
-    }
 
     public componentDidMount(): void {
         if (Utils.isNull(this._registration)) {
@@ -53,15 +34,14 @@ class Clock extends React.Component<ClockProps, ClockState> {
         }
     }
 
-    public shouldComponentUpdate(nextProps: Readonly<ClockProps>, nextState: Readonly<ClockState>, nextContext: any): boolean {
+    public shouldComponentUpdate(nextProps: Readonly<ClockProps>, nextState: Readonly<any>, nextContext: any): boolean {
         const seconds: number = new Date(nextProps.value).getSeconds();
         const asString: string = seconds.toString(10);
         return parseInt(asString.charAt(0), 10) % 2 !== 0;
     }
 
     public render() {
-        const {classes, value} = this.props;
-        const {isRed} = this.state;
+        const {classes, value, isRed} = this.props;
 
         return (
             <div className={classes.root}>
@@ -74,12 +54,14 @@ class Clock extends React.Component<ClockProps, ClockState> {
 }
 
 export default connect((state: ReduxState, ownProps: any) => {
+        const {value, isRed} = state.clock;
         return Object.assign({}, ownProps, {
-            value: state.clock.value
+            value,
+            isRed
         });
     },
     (dispatch: Dispatch<ReduxState>, ownProps: ClockProps) => {
         return Object.assign({}, ownProps, {
             dispatch
         });
-})(withStyles(clockStyles)(Clock));
+    })(withStyles(clockStyles)(Clock));

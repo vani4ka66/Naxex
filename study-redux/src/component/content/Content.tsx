@@ -9,27 +9,19 @@ import Clock from "component/clock/Clock";
 import Utils from "util/Utils";
 import {Dispatch} from "redux";
 import {ReduxState} from "app/redux/ReduxState";
+import {SetClockRed} from "app/redux/ReduxActions";
 
 interface ContentProps extends WithStyles<any> {
 
     classes: any;
     appViewType: ViewType;
-    dispatch?: Dispatch<ReduxState>;
-}
-
-interface ContentState {
-
     isRedClock: boolean;
+    dispatch?: Dispatch<ReduxState>;
 }
 
 class Content extends React.Component<ContentProps, any> {
 
     private _clockSwitcher: any;
-
-    public constructor(props) {
-        super(props);
-        this.state = {};
-    }
 
     private content(viewType: ViewType): JSX.Element {
         if (Utils.isNotNull(this._clockSwitcher)) {
@@ -39,11 +31,9 @@ class Content extends React.Component<ContentProps, any> {
         switch (viewType) {
             case ViewType.Clock:
                 this._clockSwitcher = setInterval(() => {
-                    this.setState({
-                        isRedClock: !this.state.isRedClock
-                    });
+                    this.props.dispatch(new SetClockRed(!this.props.isRedClock));
                 }, 10000);
-                return <Clock isRed={this.state.isRedClock}/>;
+                return <Clock />;
         }
         return null;
     }
@@ -79,6 +69,12 @@ class Content extends React.Component<ContentProps, any> {
 
 export default connect((state: ReduxState, ownProps: any) => {
     return Object.assign({}, ownProps, {
-        appViewType: state.app.viewType
+        appViewType: state.app.viewType,
+        isRedClock: state.clock.isRed
+    });
+},
+    (dispatch: Dispatch<ReduxState>, ownProps: ContentProps) => {
+    return Object.assign({}, ownProps, {
+        dispatch
     });
 })(withStyles(contentStyles)(Content));

@@ -18,6 +18,7 @@ export interface AppState {
 export interface ClockState {
 
     value?: number;
+    isRed?: boolean;
 }
 
 export interface FormState {

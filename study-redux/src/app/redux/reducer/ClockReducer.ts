@@ -2,7 +2,7 @@ import {ReducerBuilder} from "redux-ts";
 import {Action} from "redux";
 import {ClockState} from "app/redux/ReduxState";
 import Logger from "core/logger/Logger";
-import {SetClockValue} from "app/redux/ReduxActions";
+import {SetClockRed, SetClockValue} from "app/redux/ReduxActions";
 
 export class ClockReducer {
 
@@ -28,6 +28,11 @@ export class ClockReducer {
             .handle(SetClockValue, (state: ClockState, action: SetClockValue) => {
                 return Object.assign({}, state, {
                     value: action.value
+                });
+            })
+            .handle(SetClockRed, (state: ClockState, action: SetClockRed) => {
+                return Object.assign({}, state, {
+                    isRed: action.red
                 });
             })
             .build();

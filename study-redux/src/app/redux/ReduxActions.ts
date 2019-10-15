@@ -20,3 +20,13 @@ export class SetClockValue extends SyncAction {
         this.value = value;
     }
 }
+
+export class SetClockRed extends SyncAction {
+
+    public readonly red: boolean;
+
+    constructor(red: boolean) {
+        super();
+        this.red = red;
+    }
+}
