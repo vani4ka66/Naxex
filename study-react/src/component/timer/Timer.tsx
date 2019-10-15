@@ -30,6 +30,7 @@ const Timer: React.FunctionComponent<TimerProps> = (props: TimerProps): JSX.Elem
     };
 
     useEffect(() => {
+        logger.info("Use effect. Running: " + running + " Timer value: " + timerValue);
         let interval: any;
         if (running) {
             logger.info("Start timer at: " + timerValue);
@@ -44,7 +45,7 @@ const Timer: React.FunctionComponent<TimerProps> = (props: TimerProps): JSX.Elem
                     return newValue;
                 });
             }, 1000);
-        } else if (!running || timerValue <= 0) {
+        } else if (!running) {
             stop(interval);
         }
         return () => {
