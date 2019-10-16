@@ -7,10 +7,11 @@ import Logger from "core/logger/Logger";
 import {ThemeLoader} from "app/theme/ThemeLoader";
 import Root from "component/root/Root";
 import {ReduxStore} from "app/redux/ReduxStore";
-import {ReducersMapObject} from "redux";
+import {Action, Dispatch, Middleware, MiddlewareAPI, ReducersMapObject} from "redux";
 import {AppReducer} from "app/redux/reducer/AppReducer";
 import {ClockReducer} from "app/redux/reducer/ClockReducer";
 import {FormReducer} from "app/redux/reducer/FormReducer";
+import {ReduxState} from "app/redux/ReduxState";
 
 const logger: Logger = Logger.Of("App");
 
@@ -20,7 +21,12 @@ const reducersMap: ReducersMapObject = {
     form: FormReducer.instance().reducer
 };
 
-const reduxStore: ReduxStore = new ReduxStore(reducersMap);
+const nameMiddleWare: Middleware = (api: MiddlewareAPI<any>) => (next: Dispatch<ReduxState>) => <A extends Action>(action: A): A => {
+    // logger.info("Middleware Action " + action.type);
+    return next(action);
+};
+
+const reduxStore: ReduxStore = new ReduxStore(reducersMap, [nameMiddleWare]);
 
 ThemeLoader.instance().load()
     .then((theme: {definition: object}) => {

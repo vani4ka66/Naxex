@@ -23,7 +23,7 @@ class Form extends React.Component<FormProps, any> {
             <div className={classes.root}>
                 <div className={classes.section}>
                     <div className={classes.title}>Name:</div>
-                    <input type="text" value={name || ""} className={classes.input}
+                    <input type="text" value={name} className={classes.input}
                            onChange={(e) => {
                                dispatch(new SetName(e.target.value));
                            }}
@@ -31,7 +31,7 @@ class Form extends React.Component<FormProps, any> {
                 </div>
                 <div className={classes.section}>
                     <div className={classes.title}>Email:</div>
-                    <input type="text" value={email || ""} className={classes.input}
+                    <input type="text" value={email} className={classes.input}
                            onChange={(e) => {
                                dispatch(new SetEmail(e.target.value));
                            }}
@@ -39,7 +39,7 @@ class Form extends React.Component<FormProps, any> {
                 </div>
                 <div className={classes.section}>
                     <div className={classes.title}>Phone Number:</div>
-                    <input type="text" value={phone || ""} className={classes.input}
+                    <input type="text" value={phone} className={classes.input}
                            onChange={(e) => {
                                dispatch(new SetPhone(e.target.value));
                            }}

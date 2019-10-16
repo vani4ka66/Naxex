@@ -23,6 +23,9 @@ export class FormReducer {
     private setup(builder: ReducerBuilder<FormState>): void {
         builder
             .init({
+                name: "",
+                phone: "",
+                email: ""
             })
             .handle(SetName, (state: FormState, action: SetName) => {
                 return Object.assign({}, state, {
