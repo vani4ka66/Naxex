@@ -30,3 +30,33 @@ export class SetClockRed extends SyncAction {
         this.red = red;
     }
 }
+
+export class SetName extends SyncAction {
+
+    public readonly name: string;
+
+    constructor(name: string) {
+        super();
+        this.name = name;
+    }
+}
+
+export class SetEmail extends SyncAction {
+
+    public readonly email: string;
+
+    constructor(email: string) {
+        super();
+        this.email = email;
+    }
+}
+
+export class SetPhone extends SyncAction {
+
+    public readonly phone: string;
+
+    constructor(phone: string) {
+        super();
+        this.phone = phone;
+    }
+}

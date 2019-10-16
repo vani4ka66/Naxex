@@ -10,6 +10,7 @@ import Utils from "util/Utils";
 import {Dispatch} from "redux";
 import {ReduxState} from "app/redux/ReduxState";
 import {SetClockRed} from "app/redux/ReduxActions";
+import Form from "component/form/Form";
 
 interface ContentProps extends WithStyles<any> {
 
@@ -34,6 +35,8 @@ class Content extends React.Component<ContentProps, any> {
                     this.props.dispatch(new SetClockRed(!this.props.isRedClock));
                 }, 10000);
                 return <Clock />;
+            case ViewType.Form:
+                return <Form />;
         }
         return null;
     }

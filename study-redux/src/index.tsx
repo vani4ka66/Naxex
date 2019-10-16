@@ -10,12 +10,14 @@ import {ReduxStore} from "app/redux/ReduxStore";
 import {ReducersMapObject} from "redux";
 import {AppReducer} from "app/redux/reducer/AppReducer";
 import {ClockReducer} from "app/redux/reducer/ClockReducer";
+import {FormReducer} from "app/redux/reducer/FormReducer";
 
 const logger: Logger = Logger.Of("App");
 
 const reducersMap: ReducersMapObject = {
     app: AppReducer.instance().reducer,
-    clock: ClockReducer.instance().reducer
+    clock: ClockReducer.instance().reducer,
+    form: FormReducer.instance().reducer
 };
 
 const reduxStore: ReduxStore = new ReduxStore(reducersMap);
