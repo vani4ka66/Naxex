@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState, Fragment} from "react";
+import React, {useRef, useEffect, useState, useReducer} from "react";
 import withStyles, {WithStyles} from "react-jss";
 import {toDoListStyles} from "component/toDoList/styles";
 import DateTime from "core/format/DateTime";
@@ -9,43 +9,72 @@ interface ToDoListProps extends WithStyles<any> {
 
 }
 
+const logger1 = Logger.Of("ToDoList");
+
 const ToDoList: React.FunctionComponent<ToDoListProps>  = (props: ToDoListProps): JSX.Element => {
 
-    const logger1 = Logger.Of("ToDoList");
-    const [inputValue, setInputValue] = useState<string>("");
-    const [todoArr, setToDoArr] = useState<string[]>(["go shopping", "go to the hairdresser", "make a cake"]);
     const {classes} = props;
 
-    const add = (): void => {
-        if (inputValue !== "") {
-            setToDoArr([...todoArr, inputValue ]);
-        }
-        setInputValue("");
+    const initialState = {
+        inputValue: "",
+        toDoArr: ["go shopping", "go to the hairdresser", "make a cake"]
     };
 
-    function deleteItem(i) {
-        const newArr = todoArr.filter((item) => item !== i);
-        setToDoArr(newArr);
-    }
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case "ADD":
+                // state.value = "";
+                return {
+                    ...state,  toDoArr: [...state.toDoArr, state.value]
+                };
+            case "DELETE" :
+               state.toDoArr = state.toDoArr.filter((item) => item !== action.item);
+               return {
+                    ...state,
+                };
+            case "GET_INPUT_VALUE" :
+                const value = action.payload.inputValue;
+                return {
+                    ...state, value
+                };
+            default:
+                return state;
+        }
+    };
 
     const handleInput = ((event) => {
-        setInputValue(event.target.value);
+        dispatch({
+            type: "GET_INPUT_VALUE",
+            payload: {
+                inputValue: event.target.value
+            }
+        });
     });
 
-    return (<div className={classes.root}>
+    const add = () => {
+        dispatch({
+            type: "ADD",
+        });
+    };
 
+    const deleteItem = (item) => {
+        dispatch({type: "DELETE", item});
+    };
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    return (<div className={classes.root}>
         <div></div>
         <div className={classes.title}>ToDo List</div>
         <br />
         <ul>
-            {todoArr.map((i, index) => {
+            {state.toDoArr.map((i, index) => {
                 return (<li key={index} className={classes.item}>{i}   <span className={classes.delete} onClick={() => deleteItem(i)}>   x</span></li>);
             })}
         </ul>
         <br />
-
-        <input className={classes.inputStyle} type="text" placeholder="Add text here" value={inputValue} onChange={handleInput}/>
-        <button className={classes.actionButton} onClick={add}>Add</button>
+        <input className={classes.inputStyle} type="text" placeholder="Add text here" onChange={handleInput} />
+        <button className={classes.actionButton} onClick={add} >Add</button>
 
     </div>
     );
