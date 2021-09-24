@@ -9,6 +9,7 @@ import Clock from "component/clock/Clock";
 import Utils from "util/Utils";
 import Timer from "component/timer/Timer";
 import Counter from "component/counter/Counter";
+import ToDoList from "component/toDoList/ToDoList";
 
 interface IProps extends WithStyles<any> {
 
@@ -46,6 +47,8 @@ class Content extends React.Component<IProps, IState> {
                 return <Timer />;
             case ViewType.Counter:
                 return <Counter />;
+            case ViewType.ToDoList:
+                return <ToDoList />;
         }
         return null;
     }
