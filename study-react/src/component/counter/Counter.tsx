@@ -25,8 +25,6 @@ const Counter: React.FunctionComponent<CounterProps>  = (props: CounterProps): J
 
     useEffect(() => {
 
-        // localStorage.setItem("count", counter);
-
     });
 
     return (<div className={classes.root}>
