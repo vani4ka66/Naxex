@@ -22,20 +22,21 @@ const ToDoList: React.FunctionComponent<ToDoListProps>  = (props: ToDoListProps)
 
     const reducer = (state, action) => {
         switch (action.type) {
-            case "ADD":
-                // state.value = "";
-                return {
-                    ...state,  toDoArr: [...state.toDoArr, state.value]
-                };
-            case "DELETE" :
-               state.toDoArr = state.toDoArr.filter((item) => item !== action.item);
-               return {
-                    ...state,
-                };
             case "GET_INPUT_VALUE" :
                 const value = action.payload.inputValue;
                 return {
                     ...state, value
+                };
+            case "ADD":
+                const newArr = [...state.toDoArr, state.value];
+
+                return {
+                    ...state,  toDoArr: newArr
+                };
+            case "DELETE" :
+               state.toDoArr = state.toDoArr.filter((item) => item !== action.item);
+               return {
+                    ...state
                 };
             default:
                 return state;

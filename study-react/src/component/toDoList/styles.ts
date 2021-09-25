@@ -1,6 +1,6 @@
 export const toDoListStyles = (theme) => ({
     root: {
-        // width: "340px",
+        // width: "350px",
         // height: "200px",
         display: "flex",
         flexDirection: "column",
